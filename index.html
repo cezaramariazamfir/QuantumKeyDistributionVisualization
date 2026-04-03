@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Key Distribution</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div id="overlay">
+
+    <!--ECRAN DE WELCOME -->
+    <div id="panel-welcome" class="panel panel-center active">
+      <span class="badge">QKD Lab</span>
+      <h1>Quantum Key<br>Distribution</h1>
+      <p>
+        This is an interactive lab. Follow along to discover how two
+        people can share a secret cryptographic key using the laws of
+        quantum physics: with security guaranteed by nature itself.
+      </p>
+      <button id="btn-start" class="btn">Get Started →</button>
+    </div>
+
+    <!-- STEP 1-->
+    <div id="panel-alice" class="panel panel-right">
+      <span class="step-tag">Step 1 · The Sender</span>
+      <h2>Meet Alice</h2>
+      <p>
+        Alice wants to send a confidential message to her friend Bob.
+        Classical encryption alone cannot guarantee perfect security:
+        an eavesdropper could steal the key without leaving any trace.
+        Alice's solution: use individual <strong>photons</strong> as
+        information carriers.
+      </p>
+      <button id="btn-to-photon" class="btn">Next Step →</button>
+    </div>
+
+    <!-- STEP 2-->
+    <div id="panel-photon" class="panel panel-right">
+      <span class="step-tag">Step 2 · The Carrier</span>
+      <h2>The Photon</h2>
+      <p>
+        A photon is the fundamental particle of light. Unlike classical bits,
+        a photon <strong>cannot be copied or measured</strong> without
+        disturbing it.
+      </p>
+      <p>
+        Each photon also carries a <strong>polarization</strong>: the
+        orientation of its oscillating electric field. This tiny physical
+        property will become the backbone of the secret key.
+      </p>
+      <button id="btn-to-polarization" class="btn">Next Step →</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="panel-polarization" class="panel panel-right">
+      <span class="step-tag">Step 3 · Polarization</span>
+      <h2>Four States</h2>
+      <p>
+        A photon can be polarized in four orientations, grouped into two
+        <strong>bases</strong>. In the <strong>rectilinear basis</strong>
+        a photon is either vertical (|) or horizontal (—).
+        In the <strong>diagonal basis</strong> it is tilted at +45° or −45°.
+      </p>
+      <p>
+        Alice picks a random basis for each photon she sends and encodes a
+        bit (0 or 1) through the chosen orientation. This randomness is
+        what makes the protocol secure.
+      </p>
+      <button id="btn-to-filter" class="btn">Next Step →</button>
+    </div>
+
+    <!--STEP 4-->
+    <div id="panel-filter" class="panel panel-right">
+      <span class="step-tag">Step 4 · The Measurement</span>
+      <h2>Polarization Filters</h2>
+      <p>
+        To read a photon, Bob uses a <strong>polarization filter</strong>
+        tuned to one of the two bases. If he chooses the
+        <strong>same basis</strong> Alice used, the filter reads the photon
+        correctly and Bob gets the right bit.
+      </p>
+      <p>
+        If Bob picks the <strong>wrong basis</strong>, the photon is
+        disturbed and the result is random: he has no way of knowing
+        which answer is correct until Alice tells him afterwards.
+      </p>
+      <button id="btn-to-exchange" class="btn">Next Step →</button>
+    </div>
+
+    <!-- STEP 5 -->
+    <div id="panel-exchange" class="panel panel-right">
+      <span class="step-tag">Step 5 · The Exchange</span>
+      <h2>Sending a Photon</h2>
+      <p>
+        Alice fires a photon through her filter toward Bob.
+        Toggle Bob's basis and hit <strong>Send Photon</strong>
+        to see what he reads.
+      </p>
+      <div class="demo-controls">
+        <button id="btn-toggle-basis" class="btn btn-outline">Bob: Same Basis</button>
+        <button id="btn-send-photon" class="btn">Send Photon →</button>
+      </div>
+      <div id="result-display" class="result-box"></div>
+      <button id="btn-to-bob" class="btn" style="margin-top:1rem">Next Step →</button>
+    </div>
+
+    <!-- STEP 6-->
+    <div id="panel-bob" class="panel panel-right">
+      <span class="step-tag">Step 6 · The Receiver</span>
+      <h2>Meet Bob</h2>
+      <p>
+        Bob is waiting at the other end of the quantum channel.
+        For each photon that arrives, he independently picks a
+        <strong>random basis</strong> (rectilinear or diagonal)
+        to measure it with.
+      </p>
+      <p>
+        He has no way of knowing which basis Alice used to send it.
+        About half the time he chooses correctly and reads the right bit.
+        The other half gives a useless random result that will be
+        discarded later.
+      </p>
+      <button id="btn-to-sifting" class="btn">Next Step →</button>
+    </div>
+
+    <!-- STEP 7 -->
+    <div id="panel-sifting" class="panel panel-right">
+      <span class="step-tag">Step 7 · Sifting</span>
+      <h2>Comparing Bases</h2>
+      <p>
+        After all photons are sent, Alice and Bob publicly announce
+        which <strong>basis</strong> they each used for every photon,
+        but <em>not</em> the actual bits. Where the bases match, the
+        bit is kept. Where they differ, it is discarded.
+      </p>
+      <p>
+        About half the bits survive. The ones that do form the
+        <strong>raw sifted key</strong>.
+      </p>
+      <button id="btn-compare-bases" class="btn">Compare Bases</button>
+      <button id="btn-to-eve" class="btn" style="display:none;margin-top:0.6rem">Next Step →</button>
+    </div>
+
+    <!-- STEP 8 -->
+    <div id="panel-eve" class="panel panel-right">
+      <span class="step-tag">Step 8 · The Eavesdropper</span>
+      <h2>Enter Eve</h2>
+      <p>
+        Eve sits on the quantum channel and intercepts every photon.
+        To read it, she must pick a basis, just like Bob. If she
+        guesses wrong, she <strong>disturbs the photon's state</strong>
+        before passing it on.
+      </p>
+      <p>
+        Toggle Eve's basis and press <strong>Intercept</strong> to see
+        what happens to the photon and what Bob reads.
+      </p>
+      <div class="demo-controls">
+        <button id="btn-toggle-eve-basis" class="btn btn-outline">Eve: Wrong Basis</button>
+        <button id="btn-intercept" class="btn">Intercept!</button>
+      </div>
+      <div id="eve-result" class="result-box"></div>
+      <button id="btn-to-error-check" class="btn" style="display:none;margin-top:0.6rem">Next Step →</button>
+    </div>
+
+    <!-- STEP 9 -->
+    <div id="panel-error-check" class="panel panel-right">
+      <span class="step-tag">Step 9 · Error Check</span>
+      <h2>Checking the Channel</h2>
+      <p>
+        Alice and Bob publicly compare a subset of their sifted key bits.
+        If the <strong>error rate exceeds ~11%</strong>, the channel was
+        compromised and they abort. Below that threshold, the remaining
+        bits are safe to use as the secret key.
+      </p>
+      <div class="demo-controls">
+        <button id="btn-toggle-eve-check" class="btn btn-outline">Scenario: With Eve</button>
+        <button id="btn-check-errors" class="btn">Check Error Rate</button>
+      </div>
+      <div id="error-result" class="result-box"></div>
+      <button id="btn-to-key" class="btn" style="display:none;margin-top:0.6rem">Next Step →</button>
+    </div>
+
+    <!-- STEP 10 -->
+    <div id="panel-key" class="panel panel-right">
+      <span class="step-tag">Step 10 · The Key</span>
+      <h2>Shared Secret Established</h2>
+      <p>
+        The bits that were neither discarded (wrong basis) nor used
+        for error checking form the final <strong>shared secret key</strong>.
+        Only Alice and Bob have this key, Eve could not obtain a
+        consistent copy without leaving detectable traces.
+      </p>
+      <div class="key-display">
+        <span class="key-label">Shared Key</span>
+        <span class="key-value">1 &nbsp; 1 &nbsp; 0</span>
+      </div>
+      <p>
+        This key can now be used in a <strong>One-Time Pad</strong> or
+        any symmetric cipher to encrypt a message.
+      </p>
+    </div>
+
+  </div>
+
+  <script type="module" src="src/main.ts"></script>
+</body>
+</html>

@@ -27,7 +27,20 @@ The **BB84 protocol** is a quantum cryptography algorithm that lets two parties 
 | 9 | **Error Detection** — QBER > 11% reveals eavesdropping |
 | 10 | **Shared Key** — the remaining bits form a secret key |
 
+---
 
+## Technologies
+
+| Library | Role |
+|---------|------|
+| [Three.js](https://threejs.org/) | 3D rendering via WebGL — scene, camera, lights, geometries |
+| [GSAP](https://gsap.com/) | Animation — camera movement, object transitions, light flashes |
+| [Troika Three Text](https://github.com/protectwise/troika/tree/main/packages/troika-three-text) | 3D text rendered directly in WebGL |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety across the entire codebase |
+| [Vite](https://vite.dev/) | Dev server and bundler |
+
+
+---
 
 ## Getting Started
 

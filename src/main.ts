@@ -636,8 +636,16 @@ function goToStep(target: number): void {
   currentStep = target;
 }
 
+// Audio de fundal - porneste la primul click al utilizatorului
+const bgAudio = new Audio('/audio/background.wav');
+bgAudio.loop   = true;
+bgAudio.volume = 0.5;
+
 // EVENET LISTENERS pt next steps
-document.getElementById('btn-start')!.addEventListener('click',           () => goToStep(1));
+document.getElementById('btn-start')!.addEventListener('click', () => {
+  bgAudio.play().catch(() => {});
+  goToStep(1);
+});
 document.getElementById('btn-to-photon')!.addEventListener('click',       () => goToStep(2));
 document.getElementById('btn-to-polarization')!.addEventListener('click', () => goToStep(3));
 document.getElementById('btn-to-filter')!.addEventListener('click',       () => goToStep(4));

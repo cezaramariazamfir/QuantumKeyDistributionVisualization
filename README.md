@@ -1,8 +1,10 @@
 # Quantum Key Distribution — Interactive 3D Lab
 
 An interactive educational visualization of the **BB84 quantum key distribution protocol**, built with Three.js and TypeScript. 
-\nDemo link: https://youtu.be/25ePls7s1dI
-\nSlides: https://www.canva.com/design/DAHGer-nMNM/eAP-viUlIJ85s3928spNCQ/edit
+
+Demo link: https://youtu.be/25ePls7s1dI
+
+Slides: https://www.canva.com/design/DAHGer-nMNM/eAP-viUlIJ85s3928spNCQ/edit
 
 ![Welcome screen: intro panel with starfield background](screenshots/1.png)
 ![Step 5: The Exchange: Alice sends a photon through polarization filters toward Bob](screenshots/2.png)
